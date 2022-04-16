@@ -1,0 +1,50 @@
+﻿<Window x:Class="CS_Lab02_Derkach.Views.CalendarView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CS_Lab02_Derkach.Views"
+        mc:Ignorable="d"
+        Title="CalendarView" Height="400" Width="600" MinHeight="300" MinWidth="480">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Name="LLastname" Grid.Row="0" Grid.Column="0" FontSize="20" Margin="20,3,0,3">Lastname</Label>
+        <Label Name="LSurname" Grid.Row="0" Grid.Column="1" FontSize="20" Margin="20,3,0,3">Surname</Label>
+        <TextBox Name="TbLastname" Grid.Row="1" Grid.Column="0" FontSize="20" Margin="20,0,20,3"></TextBox>
+        <TextBox Name="TbSurname" Grid.Row="1" Grid.Column="1" FontSize="20" Margin="20,0,20,3"></TextBox>
+        <Label Name="LEmail" Grid.Row="2" Grid.Column="0" FontSize="20" Margin="20,3,0,3">Email</Label>
+        <Label Name="LBirthday" Grid.Row="2" Grid.Column="1" FontSize="20" Margin="20,3,0,3">Date of birth</Label>
+        <TextBox Name="TbEmail" Grid.Row="3" Grid.Column="0" FontSize="20" Margin="20,0,20,3"></TextBox>
+        <DatePicker  Name="DpBirthday" Grid.Row="3" Grid.Column="1" FontSize="20" Margin="20,0,20,3"></DatePicker>
+        <Button Name="BProceed" Content="Proceed"  Grid.Row="4" Grid.Column="0" Height="50" Width="150" FontSize="20" Grid.ColumnSpan="2" Click="BProceed_Click">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text.Length, ElementName=TbLastname, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Text.Length, ElementName=TbSurname, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Text.Length, ElementName=TbEmail, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Text.Length, ElementName=DpBirthday, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+    </Grid>
+</Window>
