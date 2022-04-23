@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using CS_Lab02_Derkach.Models.InputExceptions;
 
 namespace CS_Lab02_Derkach.Models
 {
@@ -67,6 +69,16 @@ namespace CS_Lab02_Derkach.Models
             Surname = surname;
             Email = email;
             Birthday = birthday;
+        }
+        public void validate()
+        {
+            if (!(new Regex("[a-zA-Z]+").Match(Lastname).Length == Lastname.Length)) throw new InvalidLastnameException();
+            if (!(new Regex("[A-Z][a-z]+").Match(Lastname).Length == Lastname.Length)) throw new CapitalLastnameException();
+            if (!(new Regex("[a-zA-Z]+").Match(Surname).Length == Surname.Length)) throw new InvalidSurnameException();
+            if (!(new Regex("[A-Z][a-z]+").Match(Surname).Length == Surname.Length)) throw new CapitalSurnameException();
+            if (!(new Regex("[a-zA-Z][0-9a-zA-Z.]+[@][a-zA-Z][a-zA-Z.]*[.][a-zA-Z]+").Match(Email).Length == Email.Length) || Email.Contains("..")) throw new InvalidEmailException();
+            if (Birthday.Value.Year.CompareTo(DateTimeOffset.Now.Year - 135) < 0) throw new ImpossibleAgeException();
+            if (Birthday.Value.CompareTo(DateTimeOffset.Now.DateTime) > 0) throw new FutureBirthdayException();
         }
         public Person(string lastname, string surname, string email)
         {
